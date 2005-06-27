@@ -1,5 +1,13 @@
 <?php
+/**
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.1.1.1.2.1 2005/06/27 10:55:45 lsces Exp $
+ * @package hotwords
+ */
 
+/**
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.1.1.1.2.1 2005/06/27 10:55:45 lsces Exp $
+ * @package HotwordsLib
+ */
 class HotwordsLib extends BitBase {
 	function HotwordsLib() {				
 	BitBase::BitBase();
