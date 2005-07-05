@@ -12,7 +12,7 @@ $tables = array(
 global $gBitInstaller;
 
 foreach( array_keys( $tables ) AS $tableName ) {
-	$gBitInstaller->registerSchemaTable( HOTWORDS_PKG_DIR, $tableName, $tables[$tableName] );
+	$gBitInstaller->registerSchemaTable( HOTWORDS_PKG_NAME, $tableName, $tables[$tableName] );
 }
 
 $gBitInstaller->registerPackageInfo( HOTWORDS_PKG_NAME, array(
