@@ -33,15 +33,15 @@
 
 		<table class="data">
 			<tr>
-				<th><a href="{$gBitLoc.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={if $sort_mode eq 'word_desc'}word_asc{else}word_desc{/if}">{tr}Word{/tr}</a></th>
-				<th><a href="{$gBitLoc.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={if $sort_mode eq 'url_desc'}url_asc{else}url_desc{/if}">{tr}URL{/tr}</a></th>
+				<th><a href="{$smarty.const.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={if $sort_mode eq 'word_desc'}word_asc{else}word_desc{/if}">{tr}Word{/tr}</a></th>
+				<th><a href="{$smarty.const.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={if $sort_mode eq 'url_desc'}url_asc{else}url_desc{/if}">{tr}URL{/tr}</a></th>
 				<th>{tr}action{/tr}</th>
 			</tr>
 				{section name=user loop=$words}
 					<tr class="{cycle values="odd,even"}">
 						<td>{$words[user].word}</td>
 						<td>{$words[user].url}</td>
-						<td class="actionicon"><a href="{$gBitLoc.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={$sort_mode}&amp;remove={$words[user].word}" onclick="return confirmTheLink(this,'{tr}Are you sure you want to delete this hotword?{/tr}')" title="Click here to delete this hotword">{biticon ipackage=liberty iname="delete" iexplain="remove"}</a>&nbsp;&nbsp;</td>
+						<td class="actionicon"><a href="{$smarty.const.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={$sort_mode}&amp;remove={$words[user].word}" onclick="return confirmTheLink(this,'{tr}Are you sure you want to delete this hotword?{/tr}')" title="Click here to delete this hotword">{biticon ipackage=liberty iname="delete" iexplain="remove"}</a>&nbsp;&nbsp;</td>
 					</tr>
 				{sectionelse}
 					<tr class="norecords"><td colspan="3">
