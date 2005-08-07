@@ -1,23 +1,27 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.2 2005/06/28 07:45:44 spiderr Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.3 2005/08/07 17:38:10 squareing Exp $
  * @package hotwords
  */
 
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.2 2005/06/28 07:45:44 spiderr Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.3 2005/08/07 17:38:10 squareing Exp $
  * @package hotwords
- * @subpackage HotwordsLib
  */
 class HotwordsLib extends BitBase {
 	function HotwordsLib() {				
 	BitBase::BitBase();
 	}
-
+	/**
+	 * List hotwords
+	 * @return Data array of hotwords
+	 * [data] is the actual array of words
+	 * [cant] is a count of the number of entries in [data]
+	 */
 	function list_hotwords($offset = 0, $maxRecords = -1, $sort_mode = 'word_desc', $find = '') {
 
 		if ($find) {
-			$findesc = $this->qstr('%' . strtoupper( $find ) . '%');
+			$findesc = $this->mDb->qstr('%' . strtoupper( $find ) . '%');
 			$mid = " where UPPER(`word`) like ?";
 			$bindvars = array($findesc);
 		} else {
@@ -25,10 +29,10 @@ class HotwordsLib extends BitBase {
 			$bindvars = array();
 		}
 
-		$query = "select * from `".BIT_DB_PREFIX."tiki_hotwords` $mid order by ".$this->convert_sortmode($sort_mode);
+		$query = "select * from `".BIT_DB_PREFIX."tiki_hotwords` $mid order by ".$this->mDb->convert_sortmode($sort_mode);
 		$query_cant = "select count(*) from `".BIT_DB_PREFIX."tiki_hotwords` $mid";
-		$result = $this->query($query,$bindvars,$maxRecords,$offset);
-		$cant = $this->getOne($query_cant,$bindvars);
+		$result = $this->mDb->query($query,$bindvars,$maxRecords,$offset);
+		$cant = $this->mDb->getOne($query_cant,$bindvars);
 		$ret = array();
 
 		while ($res = $result->fetchRow()) {
@@ -41,23 +45,40 @@ class HotwordsLib extends BitBase {
 		return $retval;
 	}
 
+	/**
+	 * Add hotword
+	 * 
+	 * @param word		Word to be replaced by link
+	 * @param url		Url to be used with that word 
+	 */
 	function add_hotword($word, $url) {
 		$word = addslashes($word);
 
 		$url = addslashes($url);
 		$query = "delete from `".BIT_DB_PREFIX."tiki_hotwords` where `word`=?";
-		$result = $this->query($query,array($word));
+		$result = $this->mDb->query($query,array($word));
 		$query = "insert into `".BIT_DB_PREFIX."tiki_hotwords`(`word`,`url`) values(?,?)";
-		$result = $this->query($query,array($word,$url));
+		$result = $this->mDb->query($query,array($word,$url));
 		return true;
 	}
 
+	/**
+	 * Remove hotword
+	 * 
+	 * @param word		Word to be removed
+	 */
 	function remove_hotword($word) {
 		$query = "delete from `".BIT_DB_PREFIX."tiki_hotwords` where `word`=?";
-		$result = $this->query($query,array($word));
+		$result = $this->mDb->query($query,array($word));
 	}
 
-	// Replace hotwords in given line
+	/**
+	 * Replace hotword
+	 *
+	 * @param line		Text to be modified by adding links
+	 * @param words		Words to be replaced by links 
+	 * @return String with hotword link
+	 */
 	function replace_hotwords($line, $words) {
 		global $gBitSystem;
 		$hotw_nw = ($gBitSystem->isFeatureActive( 'feature_hotwords_nw' )) ? "onkeypress='popUpWin(this.href,'fullScreen',0,0);' onclick='popUpWin(this.href,'fullScreen',0,0);return false;'" : '';
@@ -72,11 +93,16 @@ class HotwordsLib extends BitBase {
 		return $line;
 	}
 
+	/**
+	 * Get hotwords
+	 *
+	 * @return Array of hotwords
+	 */
 	function get_hotwords() {
 		static $retHotwords = NULL;
 		if( !isset( $retHotwords ) ) {
 			$query = "select * from `".BIT_DB_PREFIX."tiki_hotwords`";
-			$result = $this->query($query, array());
+			$result = $this->mDb->query($query, array());
 			$retHotwords = array();
 			while ($res = $result->fetchRow()) {
 				$retHotwords[$res["word"]] = $res["url"];
@@ -87,6 +113,9 @@ class HotwordsLib extends BitBase {
 
 }
 
+/**
+ * @global HotwordsLib Hotwords library
+ */
 global $hotwordlib;
 $hotwordlib = new HotwordsLib();
 
