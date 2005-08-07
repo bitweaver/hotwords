@@ -1,11 +1,11 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.1.1.1.2.3 2005/08/03 17:31:39 lsces Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.1.1.1.2.4 2005/08/07 13:17:53 lsces Exp $
  * @package hotwords
  */
 
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.1.1.1.2.3 2005/08/03 17:31:39 lsces Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.1.1.1.2.4 2005/08/07 13:17:53 lsces Exp $
  * @package hotwords
  */
 class HotwordsLib extends BitBase {
@@ -21,7 +21,7 @@ class HotwordsLib extends BitBase {
 	function list_hotwords($offset = 0, $maxRecords = -1, $sort_mode = 'word_desc', $find = '') {
 
 		if ($find) {
-			$findesc = $this->qstr('%' . strtoupper( $find ) . '%');
+			$findesc = $this->getDb()->qstr('%' . strtoupper( $find ) . '%');
 			$mid = " where UPPER(`word`) like ?";
 			$bindvars = array($findesc);
 		} else {
@@ -29,10 +29,10 @@ class HotwordsLib extends BitBase {
 			$bindvars = array();
 		}
 
-		$query = "select * from `".BIT_DB_PREFIX."tiki_hotwords` $mid order by ".$this->convert_sortmode($sort_mode);
+		$query = "select * from `".BIT_DB_PREFIX."tiki_hotwords` $mid order by ".$this->getDb()->convert_sortmode($sort_mode);
 		$query_cant = "select count(*) from `".BIT_DB_PREFIX."tiki_hotwords` $mid";
-		$result = $this->query($query,$bindvars,$maxRecords,$offset);
-		$cant = $this->getOne($query_cant,$bindvars);
+		$result = $this->getDb()->query($query,$bindvars,$maxRecords,$offset);
+		$cant = $this->getDb()->getOne($query_cant,$bindvars);
 		$ret = array();
 
 		while ($res = $result->fetchRow()) {
@@ -56,9 +56,9 @@ class HotwordsLib extends BitBase {
 
 		$url = addslashes($url);
 		$query = "delete from `".BIT_DB_PREFIX."tiki_hotwords` where `word`=?";
-		$result = $this->query($query,array($word));
+		$result = $this->getDb()->query($query,array($word));
 		$query = "insert into `".BIT_DB_PREFIX."tiki_hotwords`(`word`,`url`) values(?,?)";
-		$result = $this->query($query,array($word,$url));
+		$result = $this->getDb()->query($query,array($word,$url));
 		return true;
 	}
 
@@ -69,7 +69,7 @@ class HotwordsLib extends BitBase {
 	 */
 	function remove_hotword($word) {
 		$query = "delete from `".BIT_DB_PREFIX."tiki_hotwords` where `word`=?";
-		$result = $this->query($query,array($word));
+		$result = $this->getDb()->query($query,array($word));
 	}
 
 	/**
@@ -102,7 +102,7 @@ class HotwordsLib extends BitBase {
 		static $retHotwords = NULL;
 		if( !isset( $retHotwords ) ) {
 			$query = "select * from `".BIT_DB_PREFIX."tiki_hotwords`";
-			$result = $this->query($query, array());
+			$result = $this->getDb()->query($query, array());
 			$retHotwords = array();
 			while ($res = $result->fetchRow()) {
 				$retHotwords[$res["word"]] = $res["url"];
