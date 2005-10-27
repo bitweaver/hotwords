@@ -3,8 +3,8 @@
 $tables = array(
 
 'tiki_hotwords' => "
-  word C(40) PRIMARY,
-  url C(255) NOTNULL
+	word C(40) PRIMARY,
+	url C(255) NOTNULL
 "
 
 );
@@ -25,8 +25,8 @@ $gBitInstaller->registerPackageInfo( HOTWORDS_PKG_NAME, array(
 
 // ### Default Preferences
 $gBitInstaller->registerPreferences( HOTWORDS_PKG_NAME, array(
-	array('', 'feature_hotwords_nw','n'),
-	array('', 'feature_hotwords','y')
+	array(HOTWORDS_PKG_NAME, 'feature_hotwords_nw','n'),
+	array(HOTWORDS_PKG_NAME, 'feature_hotwords','y')
 ) );
 
 ?>
