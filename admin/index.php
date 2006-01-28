@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_hotwords/admin/index.php,v 1.1.1.1.2.1 2005/07/26 15:50:07 drewslater Exp $
+// $Header: /cvsroot/bitweaver/_bit_hotwords/admin/index.php,v 1.1.1.1.2.2 2006/01/28 09:18:13 squareing Exp $
 
 // Copyright (c) 2002-2003, Luis Argerich, Garland Foster, Eduardo Polidor, et. al.
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
@@ -11,19 +11,8 @@ require_once( '../../bit_setup_inc.php' );
 
 include_once ( HOTWORDS_PKG_PATH.'hotword_lib.php' );
 
-if ($feature_hotwords != 'y') {
-	$gBitSmarty->assign('msg', tra("This feature is disabled").": feature_hotwords");
-
-	$gBitSystem->display( 'error.tpl' );
-	die;
-}
-
-if (!$gBitUser->isAdmin()) {
-	$gBitSmarty->assign('msg', tra("You dont have permission to use this feature"));
-
-	$gBitSystem->display( 'error.tpl' );
-	die;
-}
+$gBitSystem->verifyPackage( 'hotwords' );
+$gBitSystem->verifyPermission( 'bit_p_admin' );
 
 // Process the form to add a user here
 if (isset($_REQUEST["add"])) {
