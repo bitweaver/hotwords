@@ -1,11 +1,11 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.3 2005/08/07 17:38:10 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.4 2006/01/31 20:17:44 bitweaver Exp $
  * @package hotwords
  */
 
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.3 2005/08/07 17:38:10 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.4 2006/01/31 20:17:44 bitweaver Exp $
  * @package hotwords
  */
 class HotwordsLib extends BitBase {
@@ -29,8 +29,8 @@ class HotwordsLib extends BitBase {
 			$bindvars = array();
 		}
 
-		$query = "select * from `".BIT_DB_PREFIX."tiki_hotwords` $mid order by ".$this->mDb->convert_sortmode($sort_mode);
-		$query_cant = "select count(*) from `".BIT_DB_PREFIX."tiki_hotwords` $mid";
+		$query = "select * from `".BIT_DB_PREFIX."hotwords` $mid order by ".$this->mDb->convert_sortmode($sort_mode);
+		$query_cant = "select count(*) from `".BIT_DB_PREFIX."hotwords` $mid";
 		$result = $this->mDb->query($query,$bindvars,$maxRecords,$offset);
 		$cant = $this->mDb->getOne($query_cant,$bindvars);
 		$ret = array();
@@ -55,9 +55,9 @@ class HotwordsLib extends BitBase {
 		$word = addslashes($word);
 
 		$url = addslashes($url);
-		$query = "delete from `".BIT_DB_PREFIX."tiki_hotwords` where `word`=?";
+		$query = "delete from `".BIT_DB_PREFIX."hotwords` where `word`=?";
 		$result = $this->mDb->query($query,array($word));
-		$query = "insert into `".BIT_DB_PREFIX."tiki_hotwords`(`word`,`url`) values(?,?)";
+		$query = "insert into `".BIT_DB_PREFIX."hotwords`(`word`,`url`) values(?,?)";
 		$result = $this->mDb->query($query,array($word,$url));
 		return true;
 	}
@@ -68,7 +68,7 @@ class HotwordsLib extends BitBase {
 	 * @param word		Word to be removed
 	 */
 	function remove_hotword($word) {
-		$query = "delete from `".BIT_DB_PREFIX."tiki_hotwords` where `word`=?";
+		$query = "delete from `".BIT_DB_PREFIX."hotwords` where `word`=?";
 		$result = $this->mDb->query($query,array($word));
 	}
 
@@ -101,7 +101,7 @@ class HotwordsLib extends BitBase {
 	function get_hotwords() {
 		static $retHotwords = NULL;
 		if( !isset( $retHotwords ) ) {
-			$query = "select * from `".BIT_DB_PREFIX."tiki_hotwords`";
+			$query = "select * from `".BIT_DB_PREFIX."hotwords`";
 			$result = $this->mDb->query($query, array());
 			$retHotwords = array();
 			while ($res = $result->fetchRow()) {

@@ -2,7 +2,7 @@
 
 $tables = array(
 
-'tiki_hotwords' => "
+'hotwords' => "
 	word C(40) PRIMARY,
 	url C(255) NOTNULL
 "
