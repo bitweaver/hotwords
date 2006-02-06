@@ -25,8 +25,8 @@ $gBitInstaller->registerPackageInfo( HOTWORDS_PKG_NAME, array(
 
 // ### Default Preferences
 $gBitInstaller->registerPreferences( HOTWORDS_PKG_NAME, array(
-	array(HOTWORDS_PKG_NAME, 'feature_hotwords_nw','n'),
-	array(HOTWORDS_PKG_NAME, 'feature_hotwords','y')
+	array(HOTWORDS_PKG_NAME, 'hotwords_nw','n'),
+	array(HOTWORDS_PKG_NAME, 'hotwords','y')
 ) );
 
 ?>
