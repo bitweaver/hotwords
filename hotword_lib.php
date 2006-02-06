@@ -1,11 +1,11 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.4 2006/01/31 20:17:44 bitweaver Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.5 2006/02/06 00:06:48 squareing Exp $
  * @package hotwords
  */
 
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.4 2006/01/31 20:17:44 bitweaver Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.5 2006/02/06 00:06:48 squareing Exp $
  * @package hotwords
  */
 class HotwordsLib extends BitBase {
@@ -18,7 +18,7 @@ class HotwordsLib extends BitBase {
 	 * [data] is the actual array of words
 	 * [cant] is a count of the number of entries in [data]
 	 */
-	function list_hotwords($offset = 0, $maxRecords = -1, $sort_mode = 'word_desc', $find = '') {
+	function list_hotwords($offset = 0, $max_records = -1, $sort_mode = 'word_desc', $find = '') {
 
 		if ($find) {
 			$findesc = $this->mDb->qstr('%' . strtoupper( $find ) . '%');
@@ -31,7 +31,7 @@ class HotwordsLib extends BitBase {
 
 		$query = "select * from `".BIT_DB_PREFIX."hotwords` $mid order by ".$this->mDb->convert_sortmode($sort_mode);
 		$query_cant = "select count(*) from `".BIT_DB_PREFIX."hotwords` $mid";
-		$result = $this->mDb->query($query,$bindvars,$maxRecords,$offset);
+		$result = $this->mDb->query($query,$bindvars,$max_records,$offset);
 		$cant = $this->mDb->getOne($query_cant,$bindvars);
 		$ret = array();
 
