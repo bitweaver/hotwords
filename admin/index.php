@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_hotwords/admin/index.php,v 1.4 2006/02/06 00:06:48 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_hotwords/admin/index.php,v 1.5 2006/04/11 13:05:02 squareing Exp $
 
 // Copyright (c) 2002-2003, Luis Argerich, Garland Foster, Eduardo Polidor, et. al.
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
@@ -12,7 +12,7 @@ require_once( '../../bit_setup_inc.php' );
 include_once ( HOTWORDS_PKG_PATH.'hotword_lib.php' );
 
 $gBitSystem->verifyPackage( 'hotwords' );
-$gBitSystem->verifyPermission( 'bit_p_admin' );
+$gBitSystem->verifyPermission( 'p_admin' );
 
 // Process the form to add a user here
 if (isset($_REQUEST["add"])) {
