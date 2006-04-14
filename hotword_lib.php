@@ -1,11 +1,11 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.6 2006/02/06 22:56:44 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.7 2006/04/14 20:25:51 squareing Exp $
  * @package hotwords
  */
 
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.6 2006/02/06 22:56:44 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.7 2006/04/14 20:25:51 squareing Exp $
  * @package hotwords
  */
 class HotwordsLib extends BitBase {
@@ -81,7 +81,7 @@ class HotwordsLib extends BitBase {
 	 */
 	function replace_hotwords($line, $words) {
 		global $gBitSystem;
-		$hotw_nw = ($gBitSystem->isFeatureActive( 'hotwords_nw' )) ? "onkeypress='popUpWin(this.href,'fullScreen',0,0);' onclick='popUpWin(this.href,'fullScreen',0,0);return false;'" : '';
+		$hotw_nw = ($gBitSystem->isFeatureActive( 'hotwords_new_window' )) ? "onkeypress='popUpWin(this.href,'fullScreen',0,0);' onclick='popUpWin(this.href,'fullScreen',0,0);return false;'" : '';
 
 		// Replace Hotwords
 		foreach ($words as $word => $url) {
