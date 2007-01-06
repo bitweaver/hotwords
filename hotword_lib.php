@@ -1,11 +1,11 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.7 2006/04/14 20:25:51 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.8 2007/01/06 09:46:15 squareing Exp $
  * @package hotwords
  */
 
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.7 2006/04/14 20:25:51 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.8 2007/01/06 09:46:15 squareing Exp $
  * @package hotwords
  */
 class HotwordsLib extends BitBase {
@@ -29,7 +29,7 @@ class HotwordsLib extends BitBase {
 			$bindvars = array();
 		}
 
-		$query = "select * from `".BIT_DB_PREFIX."hotwords` $mid order by ".$this->mDb->convert_sortmode($sort_mode);
+		$query = "select * from `".BIT_DB_PREFIX."hotwords` $mid order by ".$this->mDb->convertSortmode($sort_mode);
 		$query_cant = "select count(*) from `".BIT_DB_PREFIX."hotwords` $mid";
 		$result = $this->mDb->query($query,$bindvars,$max_records,$offset);
 		$cant = $this->mDb->getOne($query_cant,$bindvars);
