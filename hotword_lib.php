@@ -1,11 +1,11 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.8 2007/01/06 09:46:15 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.9 2007/09/15 06:18:04 spiderr Exp $
  * @package hotwords
  */
 
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.8 2007/01/06 09:46:15 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/Attic/hotword_lib.php,v 1.9 2007/09/15 06:18:04 spiderr Exp $
  * @package hotwords
  */
 class HotwordsLib extends BitBase {
@@ -81,13 +81,15 @@ class HotwordsLib extends BitBase {
 	 */
 	function replace_hotwords($line, $words) {
 		global $gBitSystem;
-		$hotw_nw = ($gBitSystem->isFeatureActive( 'hotwords_new_window' )) ? "onkeypress='popUpWin(this.href,'fullScreen',0,0);' onclick='popUpWin(this.href,'fullScreen',0,0);return false;'" : '';
+		if( !empty( $words ) ) {
+			$hotw_nw = ($gBitSystem->isFeatureActive( 'hotwords_new_window' )) ? "onkeypress='popUpWin(this.href,'fullScreen',0,0);' onclick='popUpWin(this.href,'fullScreen',0,0);return false;'" : '';
 
-		// Replace Hotwords
-		foreach ($words as $word => $url) {
-			// \b is a word boundary, \s is a space char
-			$line = preg_replace("/^$word(\b)/i","<a href=\"$url\" $hotw_nw>$word</a>$1",$line);
-			$line = preg_replace("/\s$word(\b)/i"," <a href=\"$url\" $hotw_nw>$word</a>$1",$line);
+			// Replace Hotwords
+			foreach ($words as $word => $url) {
+				// \b is a word boundary, \s is a space char
+				$line = preg_replace("/^$word(\b)/i","<a href=\"$url\" $hotw_nw>$word</a>$1",$line);
+				$line = preg_replace("/\s$word(\b)/i"," <a href=\"$url\" $hotw_nw>$word</a>$1",$line);
+			}
 		}
 
 		return $line;
@@ -102,10 +104,11 @@ class HotwordsLib extends BitBase {
 		static $retHotwords = NULL;
 		if( !isset( $retHotwords ) ) {
 			$query = "select * from `".BIT_DB_PREFIX."hotwords`";
-			$result = $this->mDb->query($query, array());
-			$retHotwords = array();
-			while ($res = $result->fetchRow()) {
-				$retHotwords[$res["word"]] = $res["url"];
+			if( $result = $this->mDb->query($query, array()) ) {
+				$retHotwords = array();
+				while ($res = $result->fetchRow()) {
+					$retHotwords[$res["word"]] = $res["url"];
+				}
 			}
 		}
 		return $retHotwords;
