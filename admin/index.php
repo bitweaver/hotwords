@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_hotwords/admin/index.php,v 1.5 2006/04/11 13:05:02 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_hotwords/admin/index.php,v 1.6 2008/06/25 22:21:11 spiderr Exp $
 
 // Copyright (c) 2002-2003, Luis Argerich, Garland Foster, Eduardo Polidor, et. al.
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
@@ -19,7 +19,7 @@ if (isset($_REQUEST["add"])) {
 	
 	if(empty($_REQUEST["word"]) || empty($_REQUEST["url"])) {
 	        $gBitSmarty->assign('msg', tra("You have to provide a hotword and a URL"));
-		$gBitSystem->display( 'error.tpl' );
+		$gBitSystem->display( 'error.tpl' , NULL, array( 'display_mode' => 'admin' ));
 		die;
 	}
 	$hotwordlib->add_hotword($_REQUEST["word"], $_REQUEST["url"]);
@@ -84,6 +84,6 @@ $gBitSmarty->assign_by_ref('words', $words["data"]);
 
 
 // Display the template
-$gBitSystem->display( 'bitpackage:hotwords/admin_hotwords.tpl');
+$gBitSystem->display( 'bitpackage:hotwords/admin_hotwords.tpl', NULL, array( 'display_mode' => 'admin' ));
 
 ?>
