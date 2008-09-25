@@ -12,7 +12,7 @@
 				{formlabel label="Word" for="word"}
 				{forminput}
 					<input type="text" name="word" id="word" />
-					{formhelp note=''}
+					{formhelp note='The word you want to look for and point to a given URL e.g.: google'}
 				{/forminput}
 			</div>
 
@@ -20,7 +20,7 @@
 				{formlabel label="URL" for="url"}
 				{forminput}
 					<input type="text" name="url" id="url" />
-					{formhelp note=''}
+					{formhelp note='The URL you wish to point the above word to e.g.: http://www.google.com/'}
 				{/forminput}
 			</div>
 
@@ -33,21 +33,19 @@
 
 		<table class="data">
 			<tr>
-				<th><a href="{$smarty.const.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={if $sort_mode eq 'word_desc'}word_asc{else}word_desc{/if}">{tr}Word{/tr}</a></th>
-				<th><a href="{$smarty.const.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={if $sort_mode eq 'url_desc'}url_asc{else}url_desc{/if}">{tr}URL{/tr}</a></th>
-				<th>{tr}action{/tr}</th>
+				<th>{smartlink isort=word ititle="Word"}</th>
+				<th>{smartlink isort=url  ititle="URL"}</th>
+				<th>{tr}Action{/tr}</th>
 			</tr>
-				{section name=user loop=$words}
-					<tr class="{cycle values="odd,even"}">
-						<td>{$words[user].word}</td>
-						<td>{$words[user].url}</td>
-						<td class="actionicon"><a href="{$smarty.const.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={$sort_mode}&amp;remove={$words[user].word}" onclick="return confirm('{tr}Are you sure you want to delete this hotword?{/tr}')" title="Click here to delete this hotword">{biticon ipackage="icons" iname="edit-delete" iexplain="remove"}</a>&nbsp;&nbsp;</td>
-					</tr>
-				{sectionelse}
-					<tr class="norecords"><td colspan="3">
-						{tr}No records found{/tr}
-					</td></tr>
-				{/section}
+			{foreach from=$words item=word}
+				<tr class="{cycle values="odd,even"}">
+					<td>{$word.word}</td>
+					<td>{$word.url}</td>
+					<td class="actionicon"><a href="{$smarty.const.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={$sort_mode}&amp;remove={$word.word}" onclick="return confirm('{tr}Are you sure you want to delete this hotword?{/tr}')" title="Click here to delete this hotword">{biticon ipackage="icons" iname="edit-delete" iexplain="remove"}</a>&nbsp;&nbsp;</td>
+				</tr>
+			{foreachelse}
+				<tr class="norecords"><td colspan="3">{tr}No records found{/tr}</td></tr>
+			{/foreach}
 		</table>
 
 		{pagination}
