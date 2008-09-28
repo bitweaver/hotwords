@@ -1,11 +1,11 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/BitHotwords.php,v 1.1 2008/09/25 22:28:03 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/BitHotwords.php,v 1.2 2008/09/28 06:39:47 squareing Exp $
  * @package hotwords
  */
 
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/BitHotwords.php,v 1.1 2008/09/25 22:28:03 squareing Exp $
+ * @version $Header: /cvsroot/bitweaver/_bit_hotwords/BitHotwords.php,v 1.2 2008/09/28 06:39:47 squareing Exp $
  * @package hotwords
  */
 class BitHotwords extends BitBase {
@@ -46,7 +46,7 @@ class BitHotwords extends BitBase {
 
 		BitBase::prepGetList( $pListHash );
 		$whereSql = '';
-		$bindVars = array();
+		$bindVars = $ret = array();
 
 		if( !empty( $pListHash['find'] ) ) {
 			$whereSql .= empty( $whereSql ) ? ' WHERE ' : ' AND ';
