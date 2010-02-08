@@ -1,5 +1,5 @@
 <?php
-require_once( '../../bit_setup_inc.php' );
+require_once( '../../kernel/setup_inc.php' );
 require_once( HOTWORDS_PKG_PATH.'BitHotwords.php' );
 
 $gHotwords = new BitHotwords();
