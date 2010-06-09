@@ -1,11 +1,11 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/BitHotwords.php,v 1.2 2008/09/28 06:39:47 squareing Exp $
+ * @version $Header$
  * @package hotwords
  */
 
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_hotwords/BitHotwords.php,v 1.2 2008/09/28 06:39:47 squareing Exp $
+ * @version $Header$
  * @package hotwords
  */
 class BitHotwords extends BitBase {
