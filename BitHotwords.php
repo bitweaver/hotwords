@@ -10,7 +10,7 @@
  */
 class BitHotwords extends BitBase {
 	function BitHotwords() {
-		BitBase::BitBase();
+		parent::__construct();
 	}
 
 	/**
