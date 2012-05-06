@@ -9,9 +9,6 @@
  * @package hotwords
  */
 class BitHotwords extends BitBase {
-	function BitHotwords() {
-		parent::__construct();
-	}
 
 	/**
 	 * store 
