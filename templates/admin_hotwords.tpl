@@ -8,7 +8,7 @@
 	<div class="body">
 
 		{form legend="Add Hotword"}
-			<div class="row">
+			<div class="control-group">
 				{formlabel label="Word" for="word"}
 				{forminput}
 					<input type="text" name="word" id="word" />
@@ -16,7 +16,7 @@
 				{/forminput}
 			</div>
 
-			<div class="row">
+			<div class="control-group">
 				{formlabel label="URL" for="url"}
 				{forminput}
 					<input type="text" name="url" id="url" />
@@ -24,7 +24,7 @@
 				{/forminput}
 			</div>
 
-			<div class="row submit">
+			<div class="control-group submit">
 				<input type="submit" name="add" value="{tr}Add{/tr}" />
 			</div>
 		{/form}
