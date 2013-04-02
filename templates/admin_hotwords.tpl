@@ -41,7 +41,7 @@
 				<tr class="{cycle values="odd,even"}">
 					<td>{$word.word}</td>
 					<td>{$word.url}</td>
-					<td class="actionicon"><a href="{$smarty.const.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={$sort_mode}&amp;remove={$word.word}" onclick="return confirm('{tr}Are you sure you want to delete this hotword?{/tr}')" title="Click here to delete this hotword">{biticon ipackage="icons" iname="edit-delete" iexplain="remove"}</a>&nbsp;&nbsp;</td>
+					<td class="actionicon"><a href="{$smarty.const.HOTWORDS_PKG_URL}admin/index.php?offset={$offset}&amp;sort_mode={$sort_mode}&amp;remove={$word.word}" onclick="return confirm('{tr}Are you sure you want to delete this hotword?{/tr}')" title="Click here to delete this hotword">{booticon iname="icon-trash" ipackage="icons" iexplain="remove"}</a>&nbsp;&nbsp;</td>
 				</tr>
 			{foreachelse}
 				<tr class="norecords"><td colspan="3">{tr}No records found{/tr}</td></tr>
