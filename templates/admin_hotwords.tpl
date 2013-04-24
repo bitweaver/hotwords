@@ -31,7 +31,7 @@
 
 		{minifind}
 
-		<table class="data">
+		<table class="table data">
 			<tr>
 				<th>{smartlink isort=word ititle="Word"}</th>
 				<th>{smartlink isort=url  ititle="URL"}</th>
